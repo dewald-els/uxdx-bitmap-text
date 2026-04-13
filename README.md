@@ -2,6 +2,8 @@
 
 A retro-style bitmap text editor with a CRT monitor aesthetic. Create 5x7 pixel characters and view their binary representation.
 
+> "640K ought to be enough for anybody... but 5x7 pixels? That's luxury!" - Probably not Bill Gates
+
 ## Live Demo
 
 🎮 **[View Demo on GitHub Pages](https://dewald-els.github.io/uxdx-bitmap-text/)**
