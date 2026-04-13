@@ -15,12 +15,15 @@
     flex-direction: row;
     overflow: hidden;
     box-sizing: border-box;
-    gap: 2rem;
+    gap: 3rem;
+    padding: 2rem;
 }
 .pixel-5-7-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(7, 1fr);
+    border: 2px solid #003300;
+    padding: 0;
 }
 
 .pixel-8-8-grid {
@@ -78,6 +81,45 @@
     color: #00cc00;
 }
 
+.ascii-output {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 1rem;
+    border: 2px solid #003300;
+    min-width: 200px;
+}
+
+.ascii-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00cc00;
+    border-bottom: 1px solid #00cc00;
+    padding-bottom: 0.5rem;
+}
+
+.ascii-value {
+    font-size: 1.2rem;
+    color: #00cc00;
+}
+
+.binary-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00cc00;
+    border-bottom: 1px solid #00cc00;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.pixel-states {
+    padding: 1rem;
+    font-family: monospace;
+    border: 2px solid #003300;
+    min-width: 200px;
+}
+
 .app-container {
     display: flex;
     flex-direction: column;
@@ -91,10 +133,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0;
+    gap: 1rem;
     padding: 1.5rem;
     background-color: #1a1a1a;
-    border-top: 2px solid #00cc00;
+    border-top: 2px solid #003300;
 }
 
 .character-button {
@@ -102,7 +144,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
-    border: 2px solid #00cc00;
+    border: 2px solid #006600;
     background-color: #1a1a1a;
     color: #00cc00;
     cursor: pointer;
@@ -111,49 +153,13 @@
     position: relative;
 }
 
-.character-button::before {
-    content: '';
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background-color: #1a1a1a;
-    top: -2px;
-    left: -2px;
-}
-
-.character-button::after {
-    content: '';
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background-color: #1a1a1a;
-    top: -2px;
-    right: -2px;
-}
-
-.character-button .corner-bl {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background-color: #1a1a1a;
-    bottom: -2px;
-    left: -2px;
-}
-
-.character-button .corner-br {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background-color: #1a1a1a;
-    bottom: -2px;
-    right: -2px;
-}
-
-.character-button:hover {
-    background-color: #2a2a2a;
-}
-
 .character-button:active {
     background-color: #00cc00;
     color: #1a1a1a;
+}
+
+.character-button--active {
+    background-color: #00cc00;
+    color: #1a1a1a;
+    border-color: #006600;
 }

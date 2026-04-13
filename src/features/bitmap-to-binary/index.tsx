@@ -127,6 +127,33 @@ function Pixel(props: PixelProps) {
 
 interface BinaryProps {
     character: Pixel[][];
+    selectedChar?: string;
+}
+
+function ASCIIOutput(props: BinaryProps) {
+    const {selectedChar} = props;
+    
+    if (!selectedChar) {
+        return (
+            <div className="ascii-output">
+                <div className="ascii-title">ASCII</div>
+                <div className="ascii-value">CHAR: -</div>
+                <div className="ascii-value">DEC: -</div>
+                <div className="ascii-value">HEX: -</div>
+            </div>
+        );
+    }
+    
+    const asciiValue = selectedChar.charCodeAt(0);
+    
+    return (
+        <div className="ascii-output">
+            <div className="ascii-title">ASCII</div>
+            <div className="ascii-value">CHAR: {selectedChar}</div>
+            <div className="ascii-value">DEC: {asciiValue}</div>
+            <div className="ascii-value">HEX: 0x{asciiValue.toString(16).toUpperCase().padStart(2, '0')}</div>
+        </div>
+    );
 }
 
 function BinaryOutput(props: BinaryProps) {
@@ -136,6 +163,7 @@ function BinaryOutput(props: BinaryProps) {
 
     return (
         <div className="pixel-states">
+            <div className="binary-title">BINARY</div>
             {character.map((rows, rowIdx) => rows.map((pixel, idx) => {
                 counter++;
                 const shouldBreak = counter % 5 === 0;
@@ -162,6 +190,7 @@ interface HandlePixelClick {
 function BitmapFontToBinary() {
 
     const [character, setCharacter] = useState<Pixel[][]>(FIVE_SEVEN_GRID);
+    const [selectedChar, setSelectedChar] = useState<string | undefined>(undefined);
 
     const handlePixelClick = ({row, col, newState}: HandlePixelClick) => {
         const _chars = [...character];
@@ -173,12 +202,15 @@ function BitmapFontToBinary() {
         const pattern = PREDEFINED_CHARS[char];
         if (pattern) {
             setCharacter(pattern.map(row => [...row]));
+            setSelectedChar(char);
         }
     }
 
     return (
         <div className="app-container">
             <div className="app">
+                <ASCIIOutput character={character} selectedChar={selectedChar}/>
+                <BinaryOutput character={character}/>
                 <div
                     className={character[0].length === 5 ? "pixel-5-7-grid" : character[0].length === 8 ? "pixel-8-8-grid" : character[0].length === 10 ? "pixel-10-10-grid" : "pixel-16-16-grid"}>
                     {character.map((row, rowIdx) => row.map((pixel, colIdx) => <Pixel
@@ -190,18 +222,15 @@ function BitmapFontToBinary() {
                         })
                     }}/>))}
                 </div>
-                <BinaryOutput character={character}/>
             </div>
             <div className="character-bar">
                 {Object.keys(PREDEFINED_CHARS).map((char) => (
                     <button
                         key={char}
                         onClick={() => loadCharacter(char)}
-                        className="character-button"
+                        className={`character-button ${selectedChar === char ? 'character-button--active' : ''}`}
                     >
                         {char}
-                        <span className="corner-bl"></span>
-                        <span className="corner-br"></span>
                     </button>
                 ))}
             </div>
